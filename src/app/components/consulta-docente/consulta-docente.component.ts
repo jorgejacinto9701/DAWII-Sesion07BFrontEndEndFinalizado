@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Docente } from 'src/app/models/docente.model';
 import { Ubigeo } from 'src/app/models/ubigeo.model';
+import { DocenteService } from 'src/app/services/docente.service';
 import { UbigeoService } from 'src/app/services/ubigeo.service';
 
 @Component({
@@ -10,6 +12,8 @@ import { UbigeoService } from 'src/app/services/ubigeo.service';
 export class ConsultaDocenteComponent implements OnInit {
 
   //Ng model
+  nombre:string="";
+  dni:string="";
   selDepartamento:string = ""; 
   selProvincia:string = ""; 
   selDistrito:number = 0;
@@ -19,12 +23,22 @@ export class ConsultaDocenteComponent implements OnInit {
   provincias: string[]  = [];
   distritos: Ubigeo[]  = [];
 
-  constructor(private ubigeoService: UbigeoService) { 
+  //Grila
+  docentes: Docente[] = [];
+
+  constructor(private ubigeoService: UbigeoService, 
+              private docenteService:DocenteService) { 
 
     ubigeoService.listarDepartamento().subscribe(
         response => this.departamentos = response
     );
 
+  }
+
+  consultaDocente(){
+        this.docenteService.consultaDocente(this.nombre, this.dni, this.selDistrito).subscribe(
+            response => this.docentes = response.lista
+        );
   }
 
   cargaProvincia(){
