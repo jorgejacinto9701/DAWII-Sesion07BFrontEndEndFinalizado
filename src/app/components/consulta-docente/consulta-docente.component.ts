@@ -14,9 +14,9 @@ export class ConsultaDocenteComponent implements OnInit {
   //Ng model
   nombre:string="";
   dni:string="";
-  selDepartamento:string = ""; 
-  selProvincia:string = ""; 
-  selDistrito:number = 0;
+  selDepartamento:string = "-1"; 
+  selProvincia:string = "-1"; 
+  selDistrito:number = -1;
 
   //Ubigeo
   departamentos: string[]  = [];
@@ -26,30 +26,33 @@ export class ConsultaDocenteComponent implements OnInit {
   //Grila
   docentes: Docente[] = [];
 
-  constructor(private ubigeoService: UbigeoService, 
-              private docenteService:DocenteService) { 
+  constructor(private ubigeoService: UbigeoService, private docenteService:DocenteService) { 
 
     ubigeoService.listarDepartamento().subscribe(
-        response => this.departamentos = response
+        (x) => this.departamentos = x
     );
 
   }
 
   consultaDocente(){
         this.docenteService.consultaDocente(this.nombre, this.dni, this.selDistrito).subscribe(
-            response => this.docentes = response.lista
+            (x) => this.docentes = x.lista
         );
   }
 
   cargaProvincia(){
-    this.ubigeoService.listaProvincias(this.selDepartamento).subscribe(
-          response => this.provincias = response      
-    );
+        this.ubigeoService.listaProvincias(this.selDepartamento).subscribe(
+                (x)  => this.provincias = x      
+        );
+        this.selProvincia = "-1";
+        this.distritos = [];
+        this.selDistrito = -1;
   }
   cargaDistrito(){
-    this.ubigeoService.listaDistritos(this.selDepartamento, this.selProvincia).subscribe(
-          response => this.distritos = response      
-    );
+        this.ubigeoService.listaDistritos(this.selDepartamento, this.selProvincia).subscribe(
+                (x)  => this.distritos = x      
+        );
+        this.selDistrito = -1;
   }
 
 

@@ -52,7 +52,7 @@
                 <div class="col-lg-4">
                     <label for="distrito">Distrito</label>
                     <select  id="distrito"   name="distrito"   class="form-control" [(ngModel)]="selDistrito" >
-                        <option value="0">[Seleccione]</option>
+                        <option value="-1">[Seleccione]</option>
                         <option *ngFor="let aux of distritos"    value="{{ aux.idUbigeo }}">
                             {{ aux.distrito }}
                         </option> 

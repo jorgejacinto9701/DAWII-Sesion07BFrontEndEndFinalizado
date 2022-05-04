@@ -21,8 +21,7 @@ export class UbigeoService {
   }
 
   listaDistritos(paramDep: any, paramProv: any): Observable<Ubigeo[]> {
-    return this.http.get<Ubigeo[]>(
-      baseUrl + '/listaDistritos/' + paramDep + '/' + paramProv
+    return this.http.get<Ubigeo[]>(baseUrl + '/listaDistritos/' + paramDep + '/' + paramProv
     );
   }
 }
