@@ -7,6 +7,7 @@ export class Docente {
     dni?:string;
     ubigeo?:Ubigeo;
     estado?:number;
+    fechaRegistro?:Date;
 
 
 }

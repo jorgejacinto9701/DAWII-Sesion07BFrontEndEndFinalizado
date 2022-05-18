@@ -18,7 +18,9 @@ export class ConsultaDocenteComponent implements OnInit {
   selProvincia:string = "-1"; 
   selDistrito:number = -1;
   estado:boolean = true;
-  
+  fecInicio:string = ""; 
+  fecFin:string = ""; 
+
   //Ubigeo
   departamentos: string[]  = [];
   provincias: string[]  = [];
@@ -36,7 +38,10 @@ export class ConsultaDocenteComponent implements OnInit {
   }
 
   consultaDocente(){
-    this.docenteService.listaDocente(this.nombre, this.dni, this.selDistrito, this.estado?1:0).subscribe(
+    console.log("fecInicio >>>" + this.fecInicio);
+    console.log("fecFin >>>" + this.fecFin);
+    
+    this.docenteService.listaDocente(this.nombre, this.dni, this.selDistrito, this.estado?1:0, this.fecInicio, this.fecFin).subscribe(
           (x) => {
               this.docentes = x.lista;
               alert(x.mensaje);

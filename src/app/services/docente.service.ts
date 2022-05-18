@@ -12,8 +12,8 @@ export class DocenteService {
 
   constructor(private http:HttpClient) { }
 
-  listaDocente(nombre:string, dni:string, idUbigeo:number, estado:number):Observable<any> {
-    const params = new HttpParams().set("nombre", nombre).set("dni", dni).set("idUbigeo", idUbigeo).set("estado", estado);  
+  listaDocente(nombre:string, dni:string, idUbigeo:number, estado:number,fechaInicio:string,fechaFin:string):Observable<any> {
+    const params = new HttpParams().set("nombre", nombre).set("dni", dni).set("idUbigeo", idUbigeo).set("estado", estado).set("fechaInicio", fechaInicio).set("fechaFin", fechaFin);  
     return this.http.get<any>(baseUrl + "/listaDocenteConParametros", {params});
  }
 
